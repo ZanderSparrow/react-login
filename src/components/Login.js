@@ -4,8 +4,41 @@ import Button from '@mui/material/Button';
 import TextField from "@mui/material/TextField";
 
 const Login = ({onLogin}) => {
-  const [user, setUser] = React.useState();
-  const [errors, setErrors] = React.useState({});
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [emailError, setEmailError] = React.useState();
+  const [passError, setPassError] = React.useState();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    let errors = false;
+
+    if (!password.length) {
+      setPassError("password must be 1 or more characters");
+      errors = true;
+    }
+
+    if (!email.length) {
+      setEmailError("email is required");
+      errors = true;
+    } else {
+      const validEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+      if (!email.match(validEmail)) {
+        setEmailError("please enter a valid email");
+        errors = true;
+      }
+    }
+
+    if (!errors) {
+      onLogin({email, password});
+      setEmailError(null);
+      setPassError(null);
+      setEmail("");
+      setPassword("");
+    }
+  }
 
   return (
     <Box
@@ -18,44 +51,42 @@ const Login = ({onLogin}) => {
     >
       <TextField
         required
-        error={errors.email ? true : false}
+        value={email}
+        error={Boolean(emailError)}
+        helperText={emailError}
         label="Email"
         type="email"
         variant="standard"
         onChange={(event) => {
-          setUser(event.target.value);
+          setEmail(event.target.value);
         }}
       />
 
       <TextField
           required
+          value={password}
+          error={Boolean(passError)}
+          helperText={passError}
           id="standard-password-input"
           label="Password"
           type="password"
           autoComplete="current-password"
           variant="standard"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
         />
 
       <Button 
         variant="contained" 
         size="large" 
         color="primary"
-        onClick={() => console.log(user)}
+        onClick={handleSubmit}
       >
         Login
       </Button>
     </Box>
   );
-
-  return (
-    <div>
-      <label htmlFor="email" type="email">Email:</label>
-      <input name="email" type="email"></input>
-      <label htmlFor="password">Password:</label>
-      <input type="password" name="password"></input>
-      <button onClick={onLogin}>Login</button>
-    </div>
-  )
 }
 
 export default Login;
