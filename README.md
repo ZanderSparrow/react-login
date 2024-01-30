@@ -1,6 +1,6 @@
 # Simple Login Example App
 
-This app was built in React, and was was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Styling was done using [Material UI](https://mui.com/). 
+This app was built in React, and was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Styling was done using [Material UI](https://mui.com/). 
 
 ## Getting Started
 Download the code, and run `cd react-login` from the directory containing the code, then `npm install` to install the dependencies. 
