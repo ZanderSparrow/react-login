@@ -1,6 +1,5 @@
 import './App.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { lightBlue, pink } from '@mui/material/colors';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import Landing from './pages/Landing';
@@ -8,8 +7,6 @@ import Landing from './pages/Landing';
 const theme = createTheme({
   palette: {
     mode: 'dark',
-    primary: lightBlue,
-    secondary: pink,
   },
 });
 

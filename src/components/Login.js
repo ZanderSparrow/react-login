@@ -51,6 +51,7 @@ const Login = ({onLogin}) => {
     >
       <TextField
         required
+        id="email-input"
         value={email}
         error={Boolean(emailError)}
         helperText={emailError}
